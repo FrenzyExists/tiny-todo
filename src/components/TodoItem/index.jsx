@@ -13,11 +13,10 @@ const color_pallete_roulette = {
 }
 
 
-export default function TodoItem({taskText, isComplete, todoUid}) {
+export default function TodoItem({taskText, isComplete, todoUid, updateTodoFunction}) {
   const [tags, setTags] = useState([]);
   const [showMenu, setShowMenu] = useState(false); // Modal menu thing
   const colorClasses = ['color-red', 'color-green', 'color-blue', 'color-yellow']
-  const uid = todoUid;
 
   /**
    * 
@@ -36,6 +35,14 @@ export default function TodoItem({taskText, isComplete, todoUid}) {
    * 
    * @param {React.ChangeEvent<HTMLInputElement>} e 
    */
+  const onCheckingTodo = (e) =>  {
+    updateTodoFunction(todoUid, e.target.checked, taskText)
+  }
+
+  /**
+   * 
+   * @param {React.ChangeEvent<HTMLInputElement>} e 
+   */
   const removeTag = (e) => {
     const newTags = tags.filter( (tag) => tag !== e);
   };
@@ -45,7 +52,7 @@ export default function TodoItem({taskText, isComplete, todoUid}) {
   }
 
   return (
-    <div className="todo-list-container" id={uid}>
+    <div className="todo-list-container">
       <div className="tag-container">
         {
           tags.map( tag => (
@@ -54,12 +61,14 @@ export default function TodoItem({taskText, isComplete, todoUid}) {
               <span onClick={console.log("Close tag")} className="close-tag">&times;</span>
             </div>
           ))
-        };
+        }
         <input className="add-tag" onChange={(e) => {addTag(e)}} type="text" placeholder="new tag" />
       </div>
       <div className="text-todo">
-        <input type="checkbox" checked={isComplete} />
-        <span className="text-todo">{taskText}</span>  
+        <input className="checkbox-todo" id={todoUid} type="checkbox" checked={isComplete} onChange={(e) => onCheckingTodo(e)} />
+        <label htmlFor={todoUid}>
+          <span className="text-todo">{taskText}</span>
+        </label>
       </div>
       <div className="todo-btn">
         <button className="todo-item-btn">...</button>
