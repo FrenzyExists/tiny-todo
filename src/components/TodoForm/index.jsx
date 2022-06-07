@@ -22,7 +22,7 @@ export default function TodoForm({ addTodoFunction }) {
     const [todo, setTodo] = useState({
         id: "",
         task: "",
-        tags: Tag,
+        tags: [],
         completed: false,
     });
 
