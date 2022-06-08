@@ -27,7 +27,6 @@ export default function TodoForm({ addTodoFunction }) {
     });
 
     /**
-     * 
      * @param {React.FormEvent<HTMLButtonElement>} e 
      */
     const handleSubmit = (e) => {

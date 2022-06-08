@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import TodoForm from '../TodoForm';
 import TodoItem from '../TodoItem';
 import './index.css';
@@ -11,6 +11,10 @@ export default function Todo() {
     setTodos([todo, ...todos]);
   }
 
+  const removeTodo = (todoId) => {
+    setTodos(todos.filter(t => t.id !== todoId));
+  }
+
   /**
    * 
    * @param {String} todoId 
@@ -19,7 +23,7 @@ export default function Todo() {
    */
   const updateTodo = (todoId, todoNewCheck, todoTask) => {
     const newTodos = todos.map(t => {
-      if (todoId == t.id) {
+      if (todoId === t.id) {
         return {... t, completed: todoNewCheck, task: todoTask }
       }
       return t;
@@ -29,11 +33,21 @@ export default function Todo() {
 
   const addTag = (todoId, tag) => {
     const newTodos = todos.map(t => {
-      if (todoId == t.id) {
+      if (todoId === t.id) {
         return {... t, tags: [...t.tags, tag] }
       }
       return t;
     });
+    setTodos(newTodos);
+  }
+
+  const removeTag = (todoId, tagId) => {
+    const newTodos = todos.map(t => {
+      if (todoId === t.id) {
+        return {...t, tags: t.tags.filter(j => j.id !== tagId)}
+      }
+      return t
+    })
     setTodos(newTodos);
   }
 
@@ -42,7 +56,7 @@ export default function Todo() {
       <TodoForm addTodoFunction={addTodo} />
       {
       todos.map(e => (
-        <TodoItem key={e.id} todoUid={e.id} taskText={e.task} isComplete={e.completed} updateTodoFunction={updateTodo} todoTags={e.tags} addTagFunction={addTag} />  
+        <TodoItem key={e.id} todoUid={e.id} taskText={e.task} isComplete={e.completed} updateTodoFunction={updateTodo} todoTags={e.tags} addTagFunction={addTag} removeTagFunction={removeTag} removeTodoFunction={removeTodo} />  
       ))
         }
     </div>

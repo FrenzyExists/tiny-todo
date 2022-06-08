@@ -7,6 +7,8 @@ body {
 
 .body {
     margin-left: 36px;
+    height: inherit;
+    display: flex;
 }
 
 body {
@@ -21,4 +23,8 @@ body * {
 #root {
     height: 100%;
     margin: 0;
+}
+
+.head {
+    height: inherit;
 }

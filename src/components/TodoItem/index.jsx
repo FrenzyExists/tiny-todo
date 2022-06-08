@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react'
-import ReactDOM from "react-dom";
+import React, { useState } from 'react'
 import {v4} from 'uuid';
 import './index.css'
 import Tag from '../Tag';
@@ -7,21 +6,56 @@ import Tag from '../Tag';
 
 // https://coolors.co/eac8ca-f2d5f8-e6c0e9-bfabcb-8d89a6
 
-
-export default function TodoItem({taskText, isComplete, todoUid, updateTodoFunction, todoTags, addTagFunction}) {
+/**
+ * 
+ * @param {Array} todoTags 
+ * @returns 
+ */
+export default function TodoItem({taskText, isComplete, todoUid, updateTodoFunction, todoTags, addTagFunction, removeTagFunction, removeTodoFunction}) {
   const [showMenu, setShowMenu] = useState(false); // Modal menu thing
   const colorClasses = ['color-red', 'color-green', 'color-blue', 'color-yellow']
+  const [tag, setTag] = useState({
+    id: "",
+    tagText: "",
+    color: "",
+  });
+
+/**
+   * 
+   * @returns {string}
+   */
+ const randomColorTag = () => {
+  return colorClasses[Math.floor(Math.random() * colorClasses.length)] 
+}
+
 
   /**
    * 
    * @param {React.ChangeEvent<HTMLInputElement>} e 
    */
-  const addTag = (e) => {
-    if (e.key === "Enter" && e.target.value.length > 0) {
-      // todoId, todoNewCheck, todoTask
-      addTagFunction(todoUid, e.target.value)
-      e.target.value = "";
+  const handleTagChange = e => {
+    // console.log(e.target.value.trim())
+    if (e.target.value.length >= 0) {
+      setTag({...tag, tagText: e.target.value, id: v4(), color: randomColorTag()});
     }
+  }
+
+  const removeTodo = () => {
+    // console.log(typeof removeTodoFunction)
+    // console.log(typeof addTagFunction)
+    // console.log(todoUid)
+    removeTodoFunction(todoUid)
+  }
+
+  const addTag = (e) => {
+    e.preventDefault();
+
+    if ( tag.tagText.trim().length > 0 ) {
+      if (!todoTags.some(t => t.tagText === tag.tagText)) {
+        addTagFunction(todoUid, tag);
+        setTag({...tag, tagText: ""})
+      }
+    }    
   }
 
   /**
@@ -36,40 +70,34 @@ export default function TodoItem({taskText, isComplete, todoUid, updateTodoFunct
    * 
    * @param {React.ChangeEvent<HTMLInputElement>} e 
    */
-  const removeTag = (e) => {
-    console.log(e.target.innerText)
-    const newTags = todoTags.filter( (tag) => tag !== e);
-
+  const removeTag = (id) => {
+    // const removeTag = (todoId, tagId)
+    removeTagFunction(todoUid, id);
   };
 
-  /**
-   * 
-   * @returns {string}
-   */
-  const randomColorTag = () => {
-    return colorClasses[Math.floor(Math.random() * colorClasses.length)] 
-  }
+
   return (
     <div className="todo-list-container">
       <div className="tag-container">
         {
           todoTags.map( tag => (
-            <div className={`tag`} key={v4()} >
-              <span className="text-tag">{tag}</span>
-              <span onClick={(e) => removeTag(e)} className="close-tag">&times;</span>
-            </div>
+
+            <Tag color={tag.color}  id={tag.id} key={tag.id} text={tag.tagText} removeTagFunction={removeTag} />
           ))
         }
-        <input className="add-tag" onKeyDown={(e) => {addTag(e)}} type="text" placeholder="new tag" />
+        <form onSubmit={addTag}>
+          <input className="add-tag" value={tag.tagText} onChange={handleTagChange} type="text" placeholder="new tag" />
+        </form>
       </div>
       <div className="text-todo">
         <input className="checkbox-todo" id={todoUid} type="checkbox" checked={isComplete} onChange={(e) => onCheckingTodo(e)} />
         <label htmlFor={todoUid}>
-          <span className="text-todo">{taskText}</span>
+          <span className="text-todo"><p>{taskText}</p></span>
         </label>
       </div>
       <div className="todo-btn">
-        <button className="todo-item-btn">...</button>
+        <button className="todo-item-btn edit">✎</button>
+        <button className="todo-item-btn delete" onClick={removeTodo}>⊗</button>
       </div>
     </div>
   );
