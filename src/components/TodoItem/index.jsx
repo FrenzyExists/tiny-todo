@@ -12,8 +12,9 @@ import Tag from '../Tag';
  * @returns 
  */
 export default function TodoItem({taskText, isComplete, todoUid, updateTodoFunction, todoTags, addTagFunction, removeTagFunction, removeTodoFunction}) {
-  const [showMenu, setShowMenu] = useState(false); // Modal menu thing
+  const [isEditingTodo, setIsEditingTodo] = useState(false); // Modal menu thing
   const colorClasses = ['color-red', 'color-green', 'color-blue', 'color-yellow']
+  const [tempChange, setTempChange] = useState(taskText);
   const [tag, setTag] = useState({
     id: "",
     tagText: "",
@@ -41,11 +42,50 @@ export default function TodoItem({taskText, isComplete, todoUid, updateTodoFunct
   }
 
   const removeTodo = () => {
-    // console.log(typeof removeTodoFunction)
-    // console.log(typeof addTagFunction)
-    // console.log(todoUid)
     removeTodoFunction(todoUid)
   }
+
+  /**
+   * 
+   * @param {React.ChangeEvent<HTMLInputElement>} e 
+   */
+  const onChangeUpdateTodo = (e) => {
+    setTempChange(e.target.value)
+    // updateTodoFunction(todoUid, e.target.checked, e.target.value)
+  }
+
+  const updateTodo = () => {
+    if (!isEditingTodo) {
+      setIsEditingTodo(true);
+    } else {
+      if (tempChange.length > 0) {
+        updateTodoFunction(todoUid, isComplete, tempChange)
+        setIsEditingTodo(false);
+      }
+    }
+    
+
+    // updateTodoFunction(todoUid, e.target.checked, taskText)
+  }
+
+  /**
+   * 
+   * @param {React.ChangeEvent<HTMLInputElement>} e 
+   */
+  const onKeyUpdateTodo = (e) => {
+    e.which = e.which || e.keyCode;
+    // console.log(e.which)
+    if (e.which === 13) {
+      updateTodoFunction(todoUid, isComplete, tempChange)
+      setIsEditingTodo(false);
+    }
+    else if (e.which === 27) {
+      setTempChange(taskText)
+      setIsEditingTodo(false);
+    }
+
+  }
+
 
   const addTag = (e) => {
     e.preventDefault();
@@ -88,15 +128,21 @@ export default function TodoItem({taskText, isComplete, todoUid, updateTodoFunct
         <form onSubmit={addTag}>
           <input className="add-tag" value={tag.tagText} onChange={handleTagChange} type="text" placeholder="new tag" />
         </form>
-      </div>
+      </div> {
+      (!isEditingTodo) ?
       <div className="text-todo">
-        <input className="checkbox-todo" id={todoUid} type="checkbox" checked={isComplete} onChange={(e) => onCheckingTodo(e)} />
-        <label htmlFor={todoUid}>
-          <span className="text-todo"><p>{taskText}</p></span>
-        </label>
+          <input className="checkbox-todo" id={todoUid} type="checkbox" checked={isComplete} onChange={(e) => onCheckingTodo(e)} />
+          <label htmlFor={todoUid}>
+            <span className="text-todo"><p>{taskText}</p></span>
+          </label>
       </div>
+      :
+      <div className="text-todo">
+        <input className="update-todo-box" type="text" value={tempChange} onKeyDown={(e) => onKeyUpdateTodo(e)} onChange={(e) => onChangeUpdateTodo(e)} /> 
+      </div>
+      }
       <div className="todo-btn">
-        <button className="todo-item-btn edit">✎</button>
+        <button className="todo-item-btn edit" onClick={updateTodo}>✎</button>
         <button className="todo-item-btn delete" onClick={removeTodo}>⊗</button>
       </div>
     </div>

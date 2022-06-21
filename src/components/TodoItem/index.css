@@ -67,7 +67,7 @@
 
     display: grid;
     grid-template-columns: 1.7fr 0.3fr;
-    grid-template-rows: 0.75fr 0.3fr;
+    grid-template-rows: 0.2fr 0.3fr;
     gap: 0px 0px;
     grid-auto-flow: row;
     grid-template-areas:
@@ -228,4 +228,29 @@
     padding: 10px;
     border-top: 1px solid #eee;
     border-bottom: 1px solid #eee;
+}
+
+
+.update-todo-box {
+    padding-left: 0.875rem;
+    margin-top: 8px;
+    font-size: 16px;
+    padding-top: 0.825rem;
+    line-height: 147.6%;
+    padding-bottom: 0.5rem;
+    height: 0.625rem;
+    border: none;
+    border-bottom-color: currentcolor;
+    border-bottom-style: none;
+    border-bottom-width: medium;
+    border-bottom: 0.125rem solid #6d6786;
+    background: #ce9ce234;
+    color: #6d6786;
+    margin-bottom: 10px;
+
+
+}
+
+.update-todo-box:focus {
+    outline: none;
 }

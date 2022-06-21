@@ -34,3 +34,7 @@
     background: #c2a2d4;
 
 }
+
+.todo-input:focus {
+    outline: none;
+}
