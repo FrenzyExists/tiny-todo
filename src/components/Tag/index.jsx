@@ -1,9 +1,8 @@
-import React, { useState } from 'react'
+import './index.css';
 
 export default function Tag({removeTagFunction, color, text, id}) {
 
   const r = () => {
-    console.log("REWEER")
     removeTagFunction(id)
   }
   return (

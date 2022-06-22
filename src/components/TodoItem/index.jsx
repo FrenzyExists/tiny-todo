@@ -35,7 +35,6 @@ export default function TodoItem({taskText, isComplete, todoUid, updateTodoFunct
    * @param {React.ChangeEvent<HTMLInputElement>} e 
    */
   const handleTagChange = e => {
-    // console.log(e.target.value.trim())
     if (e.target.value.length >= 0) {
       setTag({...tag, tagText: e.target.value, id: v4(), color: randomColorTag()});
     }
@@ -51,7 +50,6 @@ export default function TodoItem({taskText, isComplete, todoUid, updateTodoFunct
    */
   const onChangeUpdateTodo = (e) => {
     setTempChange(e.target.value)
-    // updateTodoFunction(todoUid, e.target.checked, e.target.value)
   }
 
   const updateTodo = () => {
@@ -63,9 +61,6 @@ export default function TodoItem({taskText, isComplete, todoUid, updateTodoFunct
         setIsEditingTodo(false);
       }
     }
-    
-
-    // updateTodoFunction(todoUid, e.target.checked, taskText)
   }
 
   /**
@@ -111,7 +106,6 @@ export default function TodoItem({taskText, isComplete, todoUid, updateTodoFunct
    * @param {React.ChangeEvent<HTMLInputElement>} e 
    */
   const removeTag = (id) => {
-    // const removeTag = (todoId, tagId)
     removeTagFunction(todoUid, id);
   };
 

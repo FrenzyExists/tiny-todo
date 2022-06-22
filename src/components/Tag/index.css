@@ -1,0 +1,70 @@
+.tag-container {
+    min-width: 60%;
+    max-width: 85%;
+    display: flex;
+    flex-wrap: wrap;
+    grid-area: tag-container;
+}
+
+.color-red {
+    background: #e4a9b4ab;
+    border: 1px solid #b67b7b69;
+    color: #844848d1;
+}
+
+.color-yellow {
+    background: #e4e0a9ab;
+    border: 1px solid #b6b27b69;
+    color: #847148d1;
+}
+
+.color-green {
+    background: #a9e4b6ab;
+    border: 1px solid #7bb69669;
+    color: #488458d1;
+}
+
+.color-blue {
+    background: #a9aee4ab;
+    border: 1px solid #7b8ab669;
+    color: #486984d1;
+}
+
+.tag {
+    display: inline-block;
+    padding: 0.3em 0.25em;
+    border-radius: 6px;
+    font-size: 9px;
+    margin-left: 0.75em;
+    margin-bottom: 0.75em;
+}
+
+.close-tag {
+    margin-left: 5px;
+    padding-left: 4px;
+    cursor: pointer;
+    border-radius: 5px;
+    padding-right: 4px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    transition: 200ms;
+    font-weight: bold;
+    font-size: 13px;
+    font-family: system-ui;
+}
+
+.color-red .close-tag:hover {
+    background-color: #bd8a8ac2;
+}
+
+.color-blue .close-tag:hover {
+    background-color: #8a98bdc2;
+}
+
+.color-yellow .close-tag:hover {
+    background-color: #bdb58ac2;
+}
+
+.color-green .close-tag:hover {
+    background-color: #8cbd8ac2;
+}

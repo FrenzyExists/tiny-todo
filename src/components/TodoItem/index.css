@@ -1,70 +1,9 @@
-.tag-container {
-    min-width: 60%;
-    max-width: 85%;
-    display: flex;
-    flex-wrap: wrap;
-    /* min-height: 30px; */
-    grid-area: tag-container;
-}
-
-.color-red {
-    background: #e4a9b4ab;
-    border: 1px solid #b67b7b69;
-    color: #844848d1;
-}
-
-.color-yellow {
-    background: #e4e0a9ab;
-    border: 1px solid #b6b27b69;
-    color: #847148d1;
-}
-
-.color-green {
-    background: #a9e4b6ab;
-    border: 1px solid #7bb69669;
-    color: #488458d1;
-}
-
-.color-blue {
-    background: #a9aee4ab;
-    border: 1px solid #7b8ab669;
-    color: #486984d1;
-}
-
-.tag {
-    display: inline-block;
-    padding: 0.3em 0.25em;
-    border-radius: 6px;
-    font-size: 9px;
-    margin-left: 0.75em;
-    margin-bottom: 0.75em;
-}
-
-.close-tag {
-    margin-left: 5px;
-    padding-left: 4px;
-    cursor: pointer;
-    border-radius: 5px;
-    padding-right: 4px;
-    padding-top: 1px;
-    padding-bottom: 1px;
-    transition: 200ms;
-    font-weight: bold;
-    font-size: 13px;
-    font-family: system-ui;
-}
-
-.color-red .close-tag:hover {
-    background-color: #bd8a8ac2;
-}
-
 .todo-list-container {
     border: 1px solid #bfabcbab;
     border-radius: 6px;
     background: #e6c0e9;
     margin-top: 10px;
     margin-bottom: 10px;
-
     display: grid;
     grid-template-columns: 1.7fr 0.3fr;
     grid-template-rows: 0.2fr 0.3fr;
@@ -118,11 +57,14 @@
     font-size: 9px;
     display: inline-block;
     margin-bottom: 4px;
+    color: #7c6786;
 }
 
 .add-tag:focus,
 .add-tag:valid {
     border-style: none;
+    outline: none;
+    border-bottom: 1px solid #7c6786;
 }
 
 .checkbox-todo {
@@ -155,7 +97,6 @@
     height: 1rem;
     background: transparent;
     border: 4px solid #ba7ed1;
-    /* margin-right: 10px; */
     margin-left: -26px;
     border-radius: 6px;
 }
@@ -173,8 +114,6 @@
     transform: rotateY(180deg);
     background: #ba7ed1;
 }
-
-
 
 .modal {
     position: fixed;
@@ -230,7 +169,6 @@
     border-bottom: 1px solid #eee;
 }
 
-
 .update-todo-box {
     padding-left: 0.875rem;
     margin-top: 8px;
@@ -246,9 +184,8 @@
     border-bottom: 0.125rem solid #6d6786;
     background: #ce9ce234;
     color: #6d6786;
+    width: 90%;
     margin-bottom: 10px;
-
-
 }
 
 .update-todo-box:focus {

@@ -1,18 +1,27 @@
 import React, {useState} from 'react'
 import TodoForm from '../TodoForm';
 import TodoItem from '../TodoItem';
+import { withCookies, useCookies } from 'react-cookie';
 import './index.css';
 
-export default function Todo() {
-  const [todos, setTodos] = useState([]);
+
+export default withCookies(function Todo() {
+  const [cookies, setCookies, removeCookies] =  useCookies([("todoListCookie", [], {path:"/", secure:'true'})]);
+  const [todos, setTodos] = useState(cookies.todoListCookie);
+
+  
+
 
   const addTodo = (todo) => {
     // adds new todo to beginning of todos array
     setTodos([todo, ...todos]);
+    setCookies("todoListCookie", [todo, ...todos], { path: "/", secure:'true' });
   }
 
   const removeTodo = (todoId) => {
-    setTodos(todos.filter(t => t.id !== todoId));
+    var remove_plz = todos.filter(t => t.id !== todoId)
+    setTodos(remove_plz);
+    setCookies("todoListCookie", remove_plz, { path: "/", secure:'true' });
   }
 
   /**
@@ -29,6 +38,7 @@ export default function Todo() {
       return t;
     });
     setTodos(newTodos);
+    setCookies("todoListCookie", newTodos, { path: "/", secure:'true' });
   }
 
   const addTag = (todoId, tag) => {
@@ -39,6 +49,7 @@ export default function Todo() {
       return t;
     });
     setTodos(newTodos);
+    setCookies("todoListCookie", newTodos, { path: "/", secure:'true' });
   }
 
   const removeTag = (todoId, tagId) => {
@@ -49,6 +60,7 @@ export default function Todo() {
       return t
     })
     setTodos(newTodos);
+    setCookies("todoListCookie", newTodos, { path: "/", secure:'true' });
   }
 
   return (
@@ -61,4 +73,4 @@ export default function Todo() {
         }
     </div>
   )
-}
+});
