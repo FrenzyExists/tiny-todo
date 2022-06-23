@@ -2,22 +2,6 @@ import React, {useState} from 'react'
 import './index.css'
 import {v4} from 'uuid';
 
-// Weird magic thing to make tags
-const Tag = ( () => {
-    var nextID = 0;
-    return (name, color) => {
-      this.id = nextID++;   
-      this.name = name
-      this.color = color
-    };
-
-  })( 
-    <div>
-        
-    </div>
-  );
-
-
 export default function TodoForm({ addTodoFunction }) {
     const [todo, setTodo] = useState({
         id: "",
