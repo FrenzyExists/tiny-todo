@@ -7,7 +7,7 @@ import './index.css';
 
 export default withCookies(function Todo() {
   const [cookies, setCookies] = useCookies([("todoListCookie", [], { path: "/", secure: 'true' })]);
-  const [todos, setTodos] = useState(cookies.todoListCookie);
+  const [todos, setTodos] = useState(cookies.todoListCookie || []);
 
 
 
