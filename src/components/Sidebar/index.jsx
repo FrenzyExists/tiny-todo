@@ -4,7 +4,7 @@ import './index.css';
 export default function Sidebar() {
   return (
     <div className="sidenav">
-        <a href="#">⚙</a>
+        <p>⚙</p>
     </div>
   )
 }

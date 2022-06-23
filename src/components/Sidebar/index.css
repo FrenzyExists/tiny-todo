@@ -13,7 +13,7 @@
     margin-right: 60px;
 }
 
-.sidenav a {
+.sidenav p {
     text-align: center;
     text-decoration: none;
     font-size: 25px;
@@ -22,6 +22,6 @@
     transition: all 200ms;
 }
 
-.sidenav a:hover {
+.sidenav p:hover {
     color: #beacd4;
 }
